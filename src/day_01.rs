@@ -22,12 +22,8 @@ pub fn part_one(input: &str, bound: usize) -> usize {
     calories.sort();
     calories.reverse();
 
-    let x = calories[..bound]
-        .to_vec()
-        .into_iter()
-        .reduce(|a, b| a + b)
-        .unwrap();
-    x
+    let x = calories.into_iter().take(bound).sum();
+    return x
 }
 
 mod test {
@@ -70,5 +66,4 @@ mod test {
         let input = fs::read_to_string("data/day_one.txt").unwrap();
         assert_eq!(201491, part_one(&input, 3));
     }
-
 }
