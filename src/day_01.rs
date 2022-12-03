@@ -11,8 +11,7 @@ pub fn part_one(input: &str, bound: usize) -> usize {
         })
         .collect();
 
-    // input_parsed.sort_by(|a, b| b.cmp(a));
-    input_parsed.reverse();
+    input_parsed.sort_by(|a, b| b.cmp(a));
 
     input_parsed.into_iter().take(bound).sum()
 }
