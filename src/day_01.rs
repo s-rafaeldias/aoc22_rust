@@ -1,29 +1,19 @@
 use std::{collections::HashMap, usize};
 
 pub fn part_one(input: &str, bound: usize) -> usize {
-    let mut elves: HashMap<usize, usize> = HashMap::new();
-    let mut current_elve: usize = 0;
+    let mut input_parsed: Vec<usize> = input
+        .split("\n\n")
+        .map(|x| {
+            return x
+                .lines()
+                .map(|x| x.parse::<usize>().unwrap_or(0))
+                .sum::<usize>();
+        })
+        .collect();
 
-    let input_parsed = input.split("\n").map(|x| x.parse::<usize>().unwrap_or(0));
+    input_parsed.sort_by(|a, b| b.cmp(a));
 
-    for item in input_parsed {
-        elves
-            .entry(current_elve)
-            .and_modify(|v| *v += item)
-            .or_insert(item);
-
-        if item == 0 {
-            current_elve += 1;
-        }
-    }
-
-    let mut calories: Vec<usize> = elves.into_values().collect();
-
-    calories.sort();
-    calories.reverse();
-
-    let x = calories.into_iter().take(bound).sum();
-    return x
+    input_parsed.into_iter().take(bound).sum()
 }
 
 mod test {
