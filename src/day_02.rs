@@ -10,7 +10,7 @@ fn map_values(v: &str) -> isize {
 }
 
 pub fn part_one(input: &str) -> isize {
-    let result: isize = input
+    let result = input
         .lines()
         .map(|round| {
             let (a, b) = round.split_whitespace().collect_tuple().unwrap();
@@ -46,7 +46,7 @@ mod test {
     #[test]
     fn part_one_result() {
         let input = include_str!("../data/day_two.txt");
-        assert_eq!(0, part_one(&input));
+        assert_eq!(12645, part_one(&input));
     }
 
     #[test]
