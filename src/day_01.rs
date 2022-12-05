@@ -1,5 +1,3 @@
-use std::{collections::HashMap, usize};
-
 pub fn part_one(input: &str, bound: usize) -> usize {
     let mut input_parsed: Vec<usize> = input
         .split("\n\n")
@@ -17,9 +15,10 @@ pub fn part_one(input: &str, bound: usize) -> usize {
 }
 
 mod test {
+    #[allow(unused_imports)]
     use super::*;
-    use std::fs;
 
+    #[allow(dead_code)]
     const INPUT: &str = r"1000
 2000
 3000
@@ -42,7 +41,7 @@ mod test {
 
     #[test]
     fn part_one_result() {
-        let input = fs::read_to_string("data/day_one.txt").unwrap();
+        let input = include_str!("../data/day_one.txt");
         assert_eq!(67622, part_one(&input, 1));
     }
 
@@ -53,7 +52,7 @@ mod test {
 
     #[test]
     fn part_two_result() {
-        let input = fs::read_to_string("data/day_one.txt").unwrap();
+        let input = include_str!("../data/day_one.txt");
         assert_eq!(201491, part_one(&input, 3));
     }
 }

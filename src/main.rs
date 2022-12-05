@@ -1,4 +1,5 @@
-pub mod day_01;
+mod day_01;
+mod day_02;
 use std::fs;
 
 fn main() {
