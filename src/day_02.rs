@@ -31,7 +31,7 @@ pub fn part_one(input: &str) -> isize {
 }
 
 // TODO: can I make this better?
-fn map_values2(a: &str, b: &str) -> (isize, isize) {
+fn map_values2(a: &str, b: &str) -> isize {
     let result = match b {
         "Y" => a, // draw
         "X" => match a {
@@ -51,7 +51,7 @@ fn map_values2(a: &str, b: &str) -> (isize, isize) {
         _ => "",
     };
 
-    (map_values(a), map_values(result))
+    map_values(result)
 }
 
 pub fn part_two(input: &str) -> isize {
@@ -59,7 +59,8 @@ pub fn part_two(input: &str) -> isize {
         .lines()
         .map(|round| {
             let (a, b) = round.split_whitespace().collect_tuple().unwrap();
-            let (x, y) = map_values2(a, b);
+            let x = map_values(a);
+            let y = map_values2(a, b);
 
             let result = (y - x).rem_euclid(3);
             match result {
