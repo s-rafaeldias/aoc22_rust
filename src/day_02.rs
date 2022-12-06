@@ -14,10 +14,9 @@ pub fn part_one(input: &str) -> isize {
         .lines()
         .map(|round| {
             let (a, b) = round.split_whitespace().collect_tuple().unwrap();
-            return (a, b);
-        })
-        .map(|(x, y)| (map_values(x), map_values(y)))
-        .map(|(x, y)| {
+            let x = map_values(a);
+            let y = map_values(b);
+
             let result = (y - x).rem_euclid(3);
             match result {
                 0 => y + 3, // draw
@@ -41,16 +40,14 @@ fn map_values2(a: &str, b: &str) -> (isize, isize) {
             "B" => "A",
             "C" => "B",
             _ => "",
-        }
-        ,
+        },
         "Z" => match a {
             // win
             "A" => "B",
             "B" => "C",
             "C" => "A",
             _ => "",
-        }
-        ,
+        },
         _ => "",
     };
 
@@ -62,10 +59,8 @@ pub fn part_two(input: &str) -> isize {
         .lines()
         .map(|round| {
             let (a, b) = round.split_whitespace().collect_tuple().unwrap();
-            return (a, b);
-        })
-        .map(|(a, b)| map_values2(a, b))
-        .map(|(x, y)| {
+            let (x, y) = map_values2(a, b);
+
             let result = (y - x).rem_euclid(3);
             match result {
                 0 => y + 3, // draw
