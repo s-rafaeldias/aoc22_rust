@@ -31,9 +31,9 @@ pub fn part_one(input: &str) -> isize {
     return result;
 }
 
-fn map_values2(a: &str, b: &str) -> (String, String) {
-    let result: String = match b {
-        "Y" => a.into(), // draw
+fn map_values2(a: &str, b: &str) -> (isize, isize) {
+    let result = match b {
+        "Y" => a, // draw
         "X" => match a {
             // lose
             "A" => "C",
@@ -41,7 +41,7 @@ fn map_values2(a: &str, b: &str) -> (String, String) {
             "C" => "B",
             _ => "",
         }
-        .into(),
+        ,
         "Z" => match a {
             // win
             "A" => "B",
@@ -49,11 +49,11 @@ fn map_values2(a: &str, b: &str) -> (String, String) {
             "C" => "A",
             _ => "",
         }
-        .into(),
-        _ => "".into(),
+        ,
+        _ => "",
     };
 
-    (a.into(), result)
+    (map_values(a), map_values(result))
 }
 
 pub fn part_two(input: &str) -> isize {
@@ -64,7 +64,6 @@ pub fn part_two(input: &str) -> isize {
             return (a, b);
         })
         .map(|(a, b)| map_values2(a, b))
-        .map(|(x, y)| (map_values(&x), map_values(&y)))
         .map(|(x, y)| {
             let result = (y - x).rem_euclid(3);
             match result {
@@ -105,6 +104,6 @@ mod test {
     #[test]
     fn part_two_result() {
         let input = include_str!("../data/day_two.txt");
-        assert_eq!(12645, part_two(&input));
+        assert_eq!(11756, part_two(&input));
     }
 }
