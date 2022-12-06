@@ -1,5 +1,15 @@
 use itertools::Itertools;
 
+fn calculate(x: isize, y: isize) -> isize {
+    let result = (y - x).rem_euclid(3);
+    match result {
+        0 => y + 3, // draw
+        1 => y + 6, // win
+        2 => y + 0, // lost
+        _ => 0,
+    }
+}
+
 fn map_values(v: &str) -> isize {
     match v {
         "A" | "X" => 1, // Rock
@@ -7,27 +17,6 @@ fn map_values(v: &str) -> isize {
         "C" | "Z" => 3, // Scissors
         _ => 0,
     }
-}
-
-pub fn part_one(input: &str) -> isize {
-    let result = input
-        .lines()
-        .map(|round| {
-            let (a, b) = round.split_whitespace().collect_tuple().unwrap();
-            let x = map_values(a);
-            let y = map_values(b);
-
-            let result = (y - x).rem_euclid(3);
-            match result {
-                0 => y + 3, // draw
-                1 => y + 6, // win
-                2 => y + 0, // lost
-                _ => 0,
-            }
-        })
-        .sum();
-
-    return result;
 }
 
 // TODO: can I make this better?
@@ -54,6 +43,20 @@ fn map_values2(a: &str, b: &str) -> isize {
     map_values(result)
 }
 
+pub fn part_one(input: &str) -> isize {
+    let result = input
+        .lines()
+        .map(|round| {
+            let (a, b) = round.split_whitespace().collect_tuple().unwrap();
+            let x = map_values(a);
+            let y = map_values(b);
+            return calculate(x, y);
+        })
+        .sum();
+
+    return result;
+}
+
 pub fn part_two(input: &str) -> isize {
     let result = input
         .lines()
@@ -61,14 +64,7 @@ pub fn part_two(input: &str) -> isize {
             let (a, b) = round.split_whitespace().collect_tuple().unwrap();
             let x = map_values(a);
             let y = map_values2(a, b);
-
-            let result = (y - x).rem_euclid(3);
-            match result {
-                0 => y + 3, // draw
-                1 => y + 6, // win
-                2 => y + 0, // lost
-                _ => 0,
-            }
+            return calculate(x, y);
         })
         .sum();
 
