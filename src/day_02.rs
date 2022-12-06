@@ -31,6 +31,7 @@ pub fn part_one(input: &str) -> isize {
     return result;
 }
 
+// TODO: can I make this better?
 fn map_values2(a: &str, b: &str) -> (isize, isize) {
     let result = match b {
         "Y" => a, // draw
